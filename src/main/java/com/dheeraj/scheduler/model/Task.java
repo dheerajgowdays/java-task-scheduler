@@ -26,7 +26,7 @@ public class Task {
         this.priority = Objects.requireNonNull(priority);
         this.status = TaskStatus.CREATED;
         this.createdAt = Instant.now();
-        this.scheduledAt =scheduledAt;
+        schedule(scheduledAt);
     }
 
     public UUID getId() {
@@ -66,7 +66,7 @@ public class Task {
         if(status != TaskStatus.CREATED){
             throw new IllegalStateException("Invalid state transition. Task cannot be scheduled for state "+this.status);
         }
-        if(scheduledAt == null || scheduledAt.isBefore(Instant.now())){
+        if(scheduledAt == null || scheduledAt.isBefore(Instant.now()) || scheduledAt.equals(Instant.now())){
             throw new IllegalArgumentException("The Schedule time must be not null and in the future");
         }
         this.scheduledAt = scheduledAt;
