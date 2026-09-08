@@ -18,7 +18,7 @@ public class Task {
     private final Instant createdAt;
     private Instant scheduledAt;
 
-    public Task(UUID id,String name,String description,Runnable action,TaskPriority priority,Instant scheduledAt){
+    public Task(UUID id,String name,String description,Runnable action,TaskPriority priority){
         this.id = Objects.requireNonNull(id);
         this.name = Objects.requireNonNull(name);
         this.description = description;
@@ -26,7 +26,6 @@ public class Task {
         this.priority = Objects.requireNonNull(priority);
         this.status = TaskStatus.CREATED;
         this.createdAt = Instant.now();
-        schedule(scheduledAt);
     }
 
     public UUID getId() {

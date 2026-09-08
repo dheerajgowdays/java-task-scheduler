@@ -12,4 +12,9 @@ public class TaskRepository {
     public void addTask(Task task){
         taskQueue.add(task);
     }
+    public Task viewTask(UUID id){
+        return taskQueue.stream()
+                .filter(task -> task.getId().equals(id))
+                .findFirst().orElse(null);
+    }
 }

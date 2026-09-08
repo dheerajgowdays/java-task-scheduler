@@ -1,7 +1,9 @@
     package com.dheeraj.scheduler;
 
     import com.dheeraj.scheduler.repository.TaskRepository;
+    import com.dheeraj.scheduler.service.SchedulingService;
     import com.dheeraj.scheduler.service.TaskService;
+    import com.dheeraj.scheduler.ui.SchedulingUi;
     import com.dheeraj.scheduler.ui.TaskManagementUi;
 
     import java.util.Scanner;
@@ -11,7 +13,8 @@
             TaskRepository taskRepository = new TaskRepository();
             TaskService taskService = new TaskService(taskRepository,sc);
             TaskManagementUi taskManagementUi = new TaskManagementUi(sc,taskService);
-
+            SchedulingService schedulingService = new SchedulingService(taskRepository);
+            SchedulingUi schedulingUi = new SchedulingUi(sc,schedulingService);
             while (true){
                 System.out.println("\n============================================");
                 System.out.println("           TASK SCHEDULER");
@@ -69,6 +72,7 @@
                         break;
                     case 6:
                         //Schedule Task
+                        schedulingUi.schedule();
                         break;
                     case 7:
                         //Schedule Task After Delay
