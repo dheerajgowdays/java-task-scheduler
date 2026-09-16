@@ -12,6 +12,5 @@ public class SchedulingService {
     }
     public void scheduleTaskAt(UUID id, Instant scheduleAt){
         Task task= taskRepository.viewTask(id);
-
     }
 }

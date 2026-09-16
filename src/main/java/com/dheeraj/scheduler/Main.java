@@ -60,15 +60,19 @@
                         break;
                     case 2:
                         //View Task
+                        taskManagementUi.viewTask();
                         break;
                     case 3:
                         //View All Task
+                        taskManagementUi.viewAllTask();
                         break;
                     case 4:
                         //Update Task
+                        taskManagementUi.updateTask();
                         break;
                     case 5:
                         //Delete Task
+                        taskManagementUi.deleteTask();
                         break;
                     case 6:
                         //Schedule Task
