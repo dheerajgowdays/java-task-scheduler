@@ -15,7 +15,7 @@ public class SchedulingUi {
     }
     public UUID readId(){
         while(true){
-            System.out.println("Enter Task Id: ");
+            System.out.print("Enter Task Id: ");
             try {
                 return UUID.fromString(sc.nextLine().trim());
             }catch(IllegalArgumentException e){
@@ -27,7 +27,7 @@ public class SchedulingUi {
     }
     public Instant readScheduleAt(){
         while(true){
-            System.out.println("Enter the Schedule Time: ");
+            System.out.print("Enter the Schedule Time: ");
             try{
                 return Instant.parse(sc.nextLine().trim());
             }catch(IllegalArgumentException e){

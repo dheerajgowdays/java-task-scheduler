@@ -1,5 +1,6 @@
     package com.dheeraj.scheduler;
 
+    import com.dheeraj.scheduler.engine.SchedulerEngine;
     import com.dheeraj.scheduler.repository.TaskRepository;
     import com.dheeraj.scheduler.service.SchedulingService;
     import com.dheeraj.scheduler.service.TaskService;
@@ -13,7 +14,8 @@
             TaskRepository taskRepository = new TaskRepository();
             TaskService taskService = new TaskService(taskRepository,sc);
             TaskManagementUi taskManagementUi = new TaskManagementUi(sc,taskService);
-            SchedulingService schedulingService = new SchedulingService(taskRepository);
+            SchedulerEngine schedulerEngine = new SchedulerEngine(2);
+            SchedulingService schedulingService = new SchedulingService(taskRepository,schedulerEngine);
             SchedulingUi schedulingUi = new SchedulingUi(sc,schedulingService);
             while (true){
                 System.out.println("\n============================================");

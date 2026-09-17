@@ -49,7 +49,7 @@ public class Task {
     public void setPriority(TaskPriority priority){
         this.priority = priority;
     }
-    public TaskStatus getStatus(){
+    public synchronized TaskStatus getStatus(){
         return status;
     }
     public Instant getCreatedAt(){
@@ -61,35 +61,35 @@ public class Task {
     public Runnable getAction() {
         return action;
     }
-    public void schedule(Instant scheduledAt){
+    public synchronized void schedule(Instant scheduledAt){
         if(status != TaskStatus.CREATED){
             throw new IllegalStateException("Invalid state transition. Task cannot be scheduled for state "+this.status);
         }
-        if(scheduledAt == null || scheduledAt.isBefore(Instant.now()) || scheduledAt.equals(Instant.now())){
+        if(scheduledAt == null || !scheduledAt.isAfter(Instant.now())){
             throw new IllegalArgumentException("The Schedule time must be not null and in the future");
         }
         this.scheduledAt = scheduledAt;
         this.status = TaskStatus.SCHEDULED;
     }
-    public void start(){
+    public synchronized void start(){
         if(status != TaskStatus.SCHEDULED){
             throw new IllegalStateException("Invalid state transition. Task cannot be started form state "+this.status);
         }
         this.status = TaskStatus.RUNNING;
     }
-    public void complete(){
+    public synchronized void complete(){
         if(status != TaskStatus.RUNNING){
             throw new IllegalStateException("Invalid state transition. Task cannot be completed form state "+this.status);
         }
         this.status = TaskStatus.COMPLETED;
     }
-    public void fail(){
+    public synchronized void fail(){
         if(status != TaskStatus.RUNNING){
             throw new IllegalStateException("Invalid state transition. Task cannot be failed form state "+this.status);
         }
         this.status = TaskStatus.FAILED;
     }
-    public void cancel(){
+    public synchronized void cancel(){
         if(status != TaskStatus.CREATED && status != TaskStatus.SCHEDULED){
             throw new IllegalStateException("Invalid state transition. Task cannot be scheduled for state "+this.status);
         }

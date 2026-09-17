@@ -34,21 +34,12 @@ public class TaskManagementUi {
         try {
             System.out.print("Enter Task Priority: ");
             TaskPriority taskPriority = TaskPriority.valueOf(sc.nextLine().trim().toUpperCase());
-            try {
-                System.out.print("Enter Scheduled Time: ");
-                String time = sc.nextLine();
-                Instant instant = Instant.parse(time);
-                UUID id = UUID.randomUUID();
-                Task task = new Task(id, name, description, action, taskPriority);
-                taskService.createTask(task);
-                System.out.println("\n-----------------------------------------");
-                System.out.println("           New Task Created With Id: "+id);
-                System.out.println("-----------------------------------------");
-            } catch (IllegalArgumentException e) {
-                System.out.println("\n--------------------------------------------------------------");
-                System.out.println("       Invalid Input! Please Enter Valid Scheduled Time Only");
-                System.out.println("--------------------------------------------------------------");
-            }
+            UUID id = UUID.randomUUID();
+            Task task = new Task(id, name, description, action, taskPriority);
+            taskService.createTask(task);
+            System.out.println("\n----------------------------------------------------------------------------");
+            System.out.println("           New Task Created With Id: "+id);
+            System.out.println("------------------------------------------------------------------------------");
         } catch (IllegalArgumentException e) {
             System.out.println("\n--------------------------------------------------------------");
             System.out.println("       Invalid Input! Please Enter Valid Priority Type Only");
