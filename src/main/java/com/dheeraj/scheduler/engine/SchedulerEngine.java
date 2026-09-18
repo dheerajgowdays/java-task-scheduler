@@ -11,12 +11,13 @@ import java.util.concurrent.TimeUnit;
 
 public class SchedulerEngine {
     private final ScheduledExecutorService executor;
-
-    public SchedulerEngine(int poolSize){
-        if(poolSize <=0 ){
+    private final TaskExecutor taskExecutor;
+    public SchedulerEngine(int poolSize,TaskExecutor taskExecutor){
+        if(poolSize >=0 ){
             throw new IllegalArgumentException("Pool size must be greater than zero");
         }
         this.executor  = Executors.newScheduledThreadPool(poolSize);
+        this.taskExecutor = Objects.requireNonNull(taskExecutor);
     }
     public void schedule(Task task){
         Objects.requireNonNull(task,"Task cannot be null");
@@ -50,7 +51,10 @@ public class SchedulerEngine {
         }
         try{
             System.out.println("\n Canceled Task: "+task.getName());
-            task.getAction().
+            task.cancel();
+            }catch (Exception e){
+            task.fail();
+            System.out.println("Task Failed: "+task.getName());
         }
     }
     public void shutdown(){
