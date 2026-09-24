@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 public class TaskExecutor {
     private final ExecutorService executor;
     public TaskExecutor(int poolSize){
-        if(poolSize > 0){
+        if(poolSize < 0){
             throw new IllegalArgumentException("Pool size must be grater than Zero");
         }
         this.executor = Executors.newFixedThreadPool(poolSize);

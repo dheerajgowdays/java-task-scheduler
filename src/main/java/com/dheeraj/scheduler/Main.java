@@ -16,7 +16,7 @@
             TaskService taskService = new TaskService(taskRepository,sc);
             TaskManagementUi taskManagementUi = new TaskManagementUi(sc,taskService);
             TaskExecutor taskExecutor = new TaskExecutor(4);
-            SchedulerEngine schedulerEngine = new SchedulerEngine(2,taskExecutor);
+            SchedulerEngine schedulerEngine = new SchedulerEngine(1,taskExecutor);
             SchedulingService schedulingService = new SchedulingService(taskRepository,schedulerEngine);
             SchedulingUi schedulingUi = new SchedulingUi(sc,schedulingService);
             while (true){
