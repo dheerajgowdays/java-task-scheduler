@@ -1,5 +1,7 @@
     package com.dheeraj.scheduler;
 
+    import java.util.Scanner;
+
     import com.dheeraj.scheduler.engine.SchedulerEngine;
     import com.dheeraj.scheduler.engine.TaskExecutor;
     import com.dheeraj.scheduler.repository.TaskRepository;
@@ -7,8 +9,6 @@
     import com.dheeraj.scheduler.service.TaskService;
     import com.dheeraj.scheduler.ui.SchedulingUi;
     import com.dheeraj.scheduler.ui.TaskManagementUi;
-
-    import java.util.Scanner;
     public class Main {
         public static void main(String[] args){
             Scanner sc = new Scanner(System.in);
@@ -60,7 +60,22 @@
                 switch (choice){
                     case 1:
                         //Create Task
-                        taskManagementUi.createTask(()-> System.out.println("Executing background job for this task!"));
+                        taskManagementUi.createTask(() -> {
+                            System.out.println(
+                                    "Task started on: "
+                                            + Thread.currentThread().getName()
+                            );
+                            try {
+                                Thread.sleep(5000);
+                            } catch (InterruptedException e) {
+                                Thread.currentThread().interrupt();
+                            }
+
+                            System.out.println(
+                                    "Task finished on: "
+                                            + Thread.currentThread().getName()
+                            );
+                        });
                         break;
                     case 2:
                         //View Task
