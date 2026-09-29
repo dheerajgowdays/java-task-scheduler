@@ -61,20 +61,14 @@
                     case 1:
                         //Create Task
                         taskManagementUi.createTask(() -> {
-                            System.out.println(
-                                    "Task started on: "
-                                            + Thread.currentThread().getName()
-                            );
+                            System.out.println("Task started on: " + Thread.currentThread().getName() );
                             try {
                                 Thread.sleep(5000);
                             } catch (InterruptedException e) {
                                 Thread.currentThread().interrupt();
                             }
 
-                            System.out.println(
-                                    "Task finished on: "
-                                            + Thread.currentThread().getName()
-                            );
+                            System.out.println("Task finished on: " + Thread.currentThread().getName() );
                         });
                         break;
                     case 2:
