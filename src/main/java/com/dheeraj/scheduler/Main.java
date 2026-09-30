@@ -67,9 +67,7 @@
                             } catch (InterruptedException e) {
                                 Thread.currentThread().interrupt();
                             }
-
-                            System.out.println("Task finished on: " + Thread.currentThread().getName() );
-                        });
+                            System.out.println("Task finished on: " + Thread.currentThread().getName() ); });
                         break;
                     case 2:
                         //View Task
